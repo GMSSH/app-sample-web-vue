@@ -14,67 +14,64 @@
 </div>
 </template>
 <script setup>
-$gm.props.childDestroyedListener(() => {
-  console.log('子应用销毁了')
-});
-$gm.props.childRectListener((res) => {
+$gm.childRectListener((res) => {
   const { width, height } = res
   console.log('实时获取应用窗口尺寸，宽：' + width + '，高：' + height);
 });
 const handleClick1=()=>{
-  $gm.props.openFolder('/');
+  $gm.openFolder('/');
 }
 const handleClick2=() => {
-  $gm.props.message.success('打开文件系统成功');
+  $gm.message.success('打开文件系统成功');
 }
 const handleClick3=() => {
-  $gm.props.dialog.warning({
+  $gm.dialog.warning({
     title: '提示',
     content: '这是提示的内容',
     positiveText: '确定',
     negativeText: '取消',
     maskClosable: false,
     onPositiveClick: () => {
-      $gm.props.message.success('点击确定');
+      $gm.message.success('点击确定');
       console.log('点击确定');
     },
   });
 }
 
 const handleClick4=() => {
-  $gm.props.closeApp();
+  $gm.closeApp();
 }
 
 const handleClick5=() => {
-  $gm.props.chooseFolder((res) => {
-    $gm.props.message.success('选择文件夹成功' + res);
+  $gm.chooseFolder((res) => {
+    $gm.message.success('选择文件夹成功' + res);
     console.log(res);
   }, '/');
 }
 
 const handleClick6=() => {
-  $gm.props.chooseFile((res) => {
-    $gm.props.message.success('选择文件成功' + res);
+  $gm.chooseFile((res) => {
+    $gm.message.success('选择文件成功' + res);
     console.log(res);
   }, '/');
 }
 
 const handleClick7=() => {
-  const { width, height } = $gm.props.getRectSize()
+  const { width, height } = $gm.getRectSize()
   console.log('获取应用初始尺寸，宽：' + width + '，高：' + height);
-  $gm.props.message.success('获取应用初始尺寸，宽：' + width + '，高：' + height);
+  $gm.message.success('获取应用初始尺寸，宽：' + width + '，高：' + height);
 }
 
 const handleClick8=() => {
-  $gm.props.openCodeEditor('/yarn.lock');
+  $gm.openCodeEditor('/yarn.lock');
 }
 
 const handleClick9=() => {
-  $gm.props.openShell({ arr: ['cd /www\n'] });
+  $gm.openShell({ arr: ['cd /www\n'] });
 }
 
 const handleClick10=() => {
-  $gm.props.openLog('日志名称', {
+  $gm.openLog('日志名称', {
     fun: () => {
       console.log('日志内容')
     },
@@ -115,7 +112,7 @@ const handleClick11=async () => {
     });
   }
   const files = await getWinFiles();
-  $gm.props.openUpload({ files, path: '/www' });
+  $gm.openUpload({ files, path: '/www' });
 }
 </script>
 <style scoped>
